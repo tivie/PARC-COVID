@@ -20,6 +20,8 @@
  */
 
 var config = {
+  // email da unidade para onde as pessoas possam comunicar
+  email: "maildaunidade@servio.pt",
   form1: {
     // URL do flow que lê e processa os dados do form1 - Formulário dos Casos Positivos
     url: ""
