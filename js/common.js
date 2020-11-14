@@ -53,9 +53,6 @@ function encodeEmailAddress(mail) {
     }
     return ch;
   });
-
-  console.log(mail);
-  
   return mail;
 }
 

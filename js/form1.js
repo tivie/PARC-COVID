@@ -23,7 +23,7 @@ function removeContact(ev) {
   ev.currentTarget.parentElement.parentElement.remove();
 }
 
-// todo passar isto para dentro do documetn ready e mudar para jquery
+// todo passar isto para dentro do document ready e mudar para jquery
 function submitForm(ev) {
   var form = $('#formulario-caso-positivo');
   if (!form[0].checkValidity()) {
@@ -49,7 +49,26 @@ function submitForm(ev) {
   arrayData.forEach(function(item) {
     // adicionar cada uns dos fields referentes ao paciente
     if (!item.name.match(/^contacto_/)) {
-      payload[item.name] = item.value;
+      var val;
+      // transformar num utente em inteiro
+      switch(item.name) {
+        
+        case 'num_utente':
+          val = parseInt(item.value);
+          break;
+          
+        case 'sexo':
+          val = item.value === 'masculino' ? 0 : 1;
+          break;
+          
+        case 'profissional_de_lar':
+        case 'profissional_de_saude':
+          val = item.value === 'on';
+          break;
+        default:
+          val = item.value;
+      }
+      payload[item.name] = val;
     }
   });
 
@@ -161,38 +180,11 @@ $(document).ready(function () {
     }
   }
   
-  $('#profissional-de-lar').click(function() {
+  $('#profissional_de_lar').click(function() {
     switchActivate($('#nome-do-lar-wrapper'));
   });
 
-  $('#profissional-de-saude').click(function() {
+  $('#profissional_de_saude').click(function() {
     switchActivate($('#instituicao-de-saude-wrapper'));
   });
-  
-  /*
-  $('#profissional-de-lar').click(function() {
-    var wrapper = $('#nome-do-lar-wrapper');
-    var input = $('#nome-do-lar-wrapper input');
-    wrapper.toggle();
-
-    if (wrapper.is(":visible")) {
-      input.attr('required', true);
-    } else {
-      input.attr('required', false);
-    }
-  });
-  $('#tem-sintomas').click(function () {
-    var dataSintomas = $('#datasintomas');
-    dataSintomas.toggle();
-
-    if (dataSintomas.is(":visible")) {
-      dataSintomas.attr('required', true);
-    } else {
-      dataSintomas.attr('required', false);
-    }
-  });
-  */
-  
-  
-  
 });
