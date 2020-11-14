@@ -76,10 +76,10 @@ function submitForm(ev) {
     if (contactos[i].value && contactos[i + 1].value) {
       // apenas processa info se tiver nome e contacto telefonico
       var contact = {
-        nome: contactos[i].value,
-        tel: contactos[i + 1].value,
-        email: contactos[i + 2].value,
-        data_contacto: contactos[i + 3].value
+        c_nome: contactos[i].value,
+        c_tel: contactos[i + 1].value,
+        c_email: contactos[i + 2].value,
+        c_data_contacto: contactos[i + 3].value
       }
       payload.contactos.push(contact);
     }
