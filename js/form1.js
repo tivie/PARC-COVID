@@ -86,9 +86,9 @@ function submitForm(ev) {
   }
 
   // para testar, abrir a consola no browser e descomentar as 2 linhas abaixo
-  console.log(payload);
-  console.log(JSON.stringify(payload));
-  return;
+  //console.log(payload);
+  //console.log(JSON.stringify(payload));
+  //return;
 
   var url = config.form1.url;
 
