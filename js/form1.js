@@ -19,6 +19,21 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+function setHasSymptoms (event) {
+  var symptInput = document.getElementById("data_sintomas");
+  if(event.target.checked) {
+    symptInput.disabled = false;
+    return;
+  }
+  symptInput.disabled = true;
+}
+
+function getComments () {
+  return document.getElementById('comentarios').value;
+}
+
+
+
 function removeContact(ev) {
   ev.currentTarget.parentElement.parentElement.remove();
 }
@@ -26,6 +41,7 @@ function removeContact(ev) {
 // todo passar isto para dentro do document ready e mudar para jquery
 function submitForm(ev) {
   var form = $('#formulario-caso-positivo');
+
   if (!form[0].checkValidity()) {
     return false;
   }
@@ -34,8 +50,10 @@ function submitForm(ev) {
 
   var arrayData = form.serializeArray();
   var contactos;
-  var payload = {};
-
+  var comentarios = getComments();
+  var payload = {
+    comentarios: comentarios,
+  };
   // primeiros 3 sao sempre do paciente
   // remove os primeiros do arrayData
   //var patient = arrayData.splice(0, 3);
@@ -86,9 +104,9 @@ function submitForm(ev) {
   }
 
   // para testar, abrir a consola no browser e descomentar as 2 linhas abaixo
-  //console.log(payload);
-  //console.log(JSON.stringify(payload));
-  //return;
+  // console.log(payload);
+  // console.log(JSON.stringify(payload));
+  // return;
 
   var url = config.form1.url;
 
