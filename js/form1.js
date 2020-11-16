@@ -19,10 +19,6 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-function removeContact(ev) {
-  ev.currentTarget.parentElement.parentElement.remove();
-}
-
 // todo passar isto para dentro do document ready e mudar para jquery
 function submitForm(ev) {
   var form = $('#formulario-caso-positivo');
@@ -46,6 +42,10 @@ function submitForm(ev) {
   payload.contactos = [];
   contactos = arrayData.filter(function(f) { return f.name.match(/^contacto_/); });
 
+  // temos de adicionar os switches (boleanos) primeiro
+  payload.profissional_de_lar = false;
+  payload.profissional_de_saude = false;
+  
   arrayData.forEach(function(item) {
     // adicionar cada uns dos fields referentes ao paciente
     if (!item.name.match(/^contacto_/)) {
@@ -72,6 +72,8 @@ function submitForm(ev) {
     }
   });
 
+  // validar boleanos
+  
   for (var i = 0; i < contactos.length; i = i + 4) {
     if (contactos[i].value && contactos[i + 1].value) {
       // apenas processa info se tiver nome e contacto telefonico

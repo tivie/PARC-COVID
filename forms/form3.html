@@ -1,0 +1,128 @@
+<!--
+  ~     PARC-COVID: Plataforma Automática de Rastreio de Contactos
+  ~     Copyright (C) 2020 - 2020 Estêvão Soares dos Santos
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU Affero General Public License as published
+  ~     by the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     You are forbidden, however, to remove ANY COPYRIGHT NOTICE FROM BOTH THE
+  ~     LICENSE FILE OR SOURCE CODE, either visible or invisible to the public.
+  ~     
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU Affero General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU Affero General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Rastreio de Contactos</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/form3.css">
+</head>
+<body>
+<div class="container">
+    <h1>Formulário de Rastreio de Contactos</h1>
+
+    <div>No seguimento da conversa telefónica, agradecemos o preenchimento cuidado deste formulário com os contactos
+        do caso positivo.<br>
+        Deve incluir um endereço de email (do próprio ou de alguém que possa preencher informação por essa pessoa)<br>
+        O seu apoio é fundamental para que possamos proteger a sua saúde e a dos seus.<br>
+        Se tiver alguma dúvida, por favor contacte-nos por email <span class="mmm"></span>.  Muito obrigado!
+    </div>
+
+    <form id="formulario-rastreio-contactos" class="needs-validation">
+        <fieldset id="lista-de-contactantes-fieldset">
+            <legend>Lista dos contactantes</legend>
+
+            <div class="form-group">
+                <p><b>Um contacto é uma pessoa que esteve com o caso positivo, presencialmente, mais do que 15 minutos!</b></p>
+                <p>Aqui deve introduzir os contactos desde a data indicada pela autoridade de saúde.<br>
+                    A <b>Data do último Contacto</b> corresponde à data em que essa pessoa esteve pela última vez
+                    com o caso positivo<br>
+                    É <b>muito importante</b> que preencha o <b>email</b> de cada contacto para que essa pessoa
+                    possa receber a <b>Declaração de Isolamento Profilático</b> atempadamente e as
+                    <b>informações sobre os procedimentos de isolamento que deve seguir!!</b><br>
+                </p>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-3 d-none d-xl-block">Nome:</div>
+                <div class="col-xl-2 d-none d-xl-block">Telefone:</div>
+                <div class="col-xl-3 d-none d-xl-block">Email:</div>
+                <div class="col-xl-4 d-none d-xl-block">Data do último contacto:</div>
+            </div>
+
+            <!-- AQUI são inseridos as infos dos contactantes -->
+            <div id="rastreio-de-contactos-items" class="form-group"></div>
+
+            <div class="form-group">
+                <span id="adicionar-contacto" class="btn btn-info">Adicionar mais um contactante</span>
+            </div>
+        </fieldset>
+        <br><br><br>
+        <!-- g-recaptcha -->
+        <button id="enviarform"
+                class="btn btn-primary"
+                data-sitekey="6LfUjN8ZAAAAABKJC-HJEXlOeIyeM9ypBXYGi_aF"
+                data-callback="onSubmit"
+                onclick="submitForm3(event)">
+            Enviar Formulário
+            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+        </button>
+    </form>
+
+    <div id="cena-para-add" style="display: none">
+        <div class="rastreio-de-contactos-row row">
+            <div class="col-xl-3 form-group required">
+                <label class="d-xl-none">Nome:</label>
+                <input aria-label="Nome completo do contacto" name="contacto_nome" type="text" class="form-control"
+                       placeholder="Nome" required>
+            </div>
+            <div class="col-xl-2 form-group required">
+                <label class="d-xl-none">Telefone:</label>
+                <input aria-label="Telefone do contacto" name="contacto_tel" type="number" class="form-control"
+                       placeholder="Telefone" required>
+            </div>
+            <div class="col-xl-3 form-group">
+                <label class="d-xl-none">Email:</label>
+                <input aria-label="Email do contacto" name="contacto_email" type="email" class="form-control"
+                       placeholder="Email" required>
+            </div>
+            <div class="col-xl-3 form-group required">
+                <label class="d-xl-none">Data do último contacto:</label>
+                <input aria-label="Data do último contacto" name="contacto_datacontacto"
+                       class="data-contacto form-control" type="date" required>
+            </div>
+            <div class="col-xl-1 form-group">
+                <button class="remove-patient btn btn-danger" onclick="removeContact(event)">Remover</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- a partir daqui não mexer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="../js/config.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/form3.js"></script>
+
+</body>
+</html>

@@ -60,3 +60,12 @@ function addLoadingStatus(ev) {
   ev.currentTarget.disabled = true;
   ev.currentTarget.children[0].classList.remove("d-none");
 }
+
+function removeContact(ev) {
+  ev.currentTarget.parentElement.parentElement.remove();
+}
+
+function getParams() {
+  var myUrl = new URL(window.location.href.replace(/#/g,"?"));
+  return myUrl.searchParams;
+}
