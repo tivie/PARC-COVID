@@ -112,6 +112,7 @@ function submitForm(ev) {
     var button = document.getElementById('enviarform');
     button.disabled = false;
     button.children[0].classList.add("d-none");
+    console.log(xhr);
     alert(xhr.responseJSON.message);
   });
 }
