@@ -18,10 +18,34 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+$(document).ready(function() {
+  
+  $('.caso_pos_name').text(getParams().get('cpn'));
+  
+  $('#fez_teste').click(function() {
+    switchActivate($('#fez-teste-wrapper'));
+  });
+  
+  $('#tem_doenca_cronica').click(function () {
+    switchActivate($('#doenca-cronica-wrapper'), false);
+  });
 
-// todo passar isto para dentro do document ready e mudar para jquery
+  $('#tem_sintomas').click(function () {
+    var $wrapper = $('#sintomas-wrapper');
+    var dataInput = $('#data_de_inicio_de_sintomas');
+    switchActivate($wrapper, false);
+
+    if ($wrapper.is(":visible")) {
+      dataInput.attr('required', true);
+    } else {
+      dataInput.attr('required', false);
+    }
+    
+  });
+});
+
 function submitForm(ev) {
-  var form = $('#formulario-caso-positivo');
+  var form = $('#formulario-contacto');
   if (!form[0].checkValidity()) {
     return false;
   }
@@ -29,22 +53,20 @@ function submitForm(ev) {
   addLoadingStatus(ev);
 
   var arrayData = form.serializeArray();
-  var contactos;
   var payload = {};
 
-  // primeiros 3 sao sempre do paciente
-  // remove os primeiros do arrayData
-  //var patient = arrayData.splice(0, 3);
+  // Obter guid do endereço e adicionar ao payload
+  payload.casehash = getParams().get('guid');
+  
+  // temos de adicionar todos os switches (checkboxes) primeiro
+  form.find('input[type=checkbox]').each(function() {
+    var key = $(this).attr('name');
+    payload[key] = false;
+  });
 
-
-  // Obter hash do endereço e adicionar ao payload
-  payload.casehash = window.location.hash.replace(/^#/, '');
-  payload.contactos = [];
-  contactos = arrayData.filter(function(f) { return f.name.match(/^contacto_/); });
-
-  // temos de adicionar os switches (boleanos) primeiro
-  payload.profissional_de_lar = false;
-  payload.profissional_de_saude = false;
+  console.log(payload);
+  console.log(JSON.stringify(payload));
+  return;
   
   arrayData.forEach(function(item) {
     // adicionar cada uns dos fields referentes ao paciente
@@ -52,15 +74,15 @@ function submitForm(ev) {
       var val;
       // transformar num utente em inteiro
       switch(item.name) {
-        
+
         case 'num_utente':
           val = parseInt(item.value);
           break;
-          
+
         case 'sexo':
           val = item.value === 'masculino' ? 0 : 1;
           break;
-          
+
         case 'profissional_de_lar':
         case 'profissional_de_saude':
           val = item.value === 'on';
@@ -73,7 +95,7 @@ function submitForm(ev) {
   });
 
   // validar boleanos
-  
+
   for (var i = 0; i < contactos.length; i = i + 4) {
     if (contactos[i].value && contactos[i + 1].value) {
       // apenas processa info se tiver nome e contacto telefonico

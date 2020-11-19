@@ -18,13 +18,6 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-(function() {
-  'use strict';
-  var mmm = document.getElementsByClassName('mmm');
-  for (var i = 0; i < mmm.length; ++i) {
-    mmm[i].innerHTML = '<a href="mailto:' + encodeEmailAddress(config.email) +'">' + encodeEmailAddress(config.email) +'</a>';
-  }
-})();
 
 function encodeEmailAddress(mail) {
   'use strict';
@@ -56,6 +49,14 @@ function encodeEmailAddress(mail) {
   return mail;
 }
 
+(function() {
+  'use strict';
+  var mmm = document.getElementsByClassName('mmm');
+  for (var i = 0; i < mmm.length; ++i) {
+    mmm[i].innerHTML = '<a href="mailto:' + encodeEmailAddress(config.email) +'">' + encodeEmailAddress(config.email) +'</a>';
+  }
+})();
+
 function addLoadingStatus(ev) {
   ev.currentTarget.disabled = true;
   ev.currentTarget.children[0].classList.remove("d-none");
@@ -65,7 +66,89 @@ function removeContact(ev) {
   ev.currentTarget.parentElement.parentElement.remove();
 }
 
+/**
+ * 
+ * @returns {URLSearchParams}
+ */
 function getParams() {
   var myUrl = new URL(window.location.href.replace(/#/g,"?"));
   return myUrl.searchParams;
 }
+
+/**
+ * 
+ * @param {jQuery} $wrapper
+ * @param {boolean} [makeRequired=true]
+ */
+function switchActivate($wrapper, makeRequired) {
+  makeRequired = !!makeRequired || true;
+  var input = $wrapper.find('input');
+  $wrapper.toggle();
+
+  if (!makeRequired) return;
+  
+  if ($wrapper.is(":visible")) {
+    input.attr('required', true);
+  } else {
+    input.attr('required', false);
+  }
+}
+
+$(document).ready(function () {
+  $('#adicionar-contacto').click(function () {
+    $('#cena-para-add .rastreio-de-contactos-row').first().clone().appendTo('#rastreio-de-contactos-items');
+  });
+
+  // Ativar/desativar dados profissionais se a pessoa estiver empregada/desempregada
+  $('#situacao-perante-emprego').change(function() {
+    var items = $('.form-dados-prof-item');
+
+    if (this.value !== 'empregado') {
+      $('#profissao').val(this.value);
+      items.hide();
+    } else {
+      $('#profissao').val('');
+      items.show();
+    }
+
+    if (items.is(":visible")) {
+      items.children('input').each(function() {
+        var item = $(this);
+        if (!item.is(':checkbox')) {
+          item.attr('required', true);
+        }
+      });
+    } else {
+      items.children('input').attr('required', false);
+    }
+  });
+
+  $('#concelho-select').change(function() {
+
+    var wrapper = $('#concelho-wrapper');
+    var input = $('#concelho');
+
+    if (this.value === 'outro') {
+      input.val('');
+      wrapper.show();
+    } else {
+      input.val(this.value);
+      wrapper.hide();
+    }
+
+    if (input.is(":visible")) {
+      input.attr('required', true);
+    } else {
+      input.attr('required', false);
+    }
+  });
+
+  $('#profissional_de_lar').click(function() {
+    switchActivate($('#nome-do-lar-wrapper'));
+  });
+
+  $('#profissional_de_saude').click(function() {
+    switchActivate($('#instituicao-de-saude-wrapper'));
+  });
+  
+});
