@@ -71,7 +71,9 @@ function removeContact(ev) {
  * @returns {URLSearchParams}
  */
 function getParams() {
-  var myUrl = new URL(window.location.href.replace(/#/g,"?"));
+  var urlStr = window.location.href.replace(/\?.*#/g,"?");
+  urlStr = urlStr.replace(/#/g, "?");
+  var myUrl = new URL(urlStr);
   return myUrl.searchParams;
 }
 

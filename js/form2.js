@@ -19,22 +19,30 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 $(document).ready(function() {
-  
-  $('.caso_pos_name').text(getParams().get('cpn'));
+
+  var case_guid = getParams().get('case_guid');
+  var contact_guid = getParams().get('contact_guid');
+  var cpn = getParams().get('cpn');
+  var id = getParams().get('id');
+  if (!case_guid || !contact_guid || !cpn || !id) {
+    $('#enviarform').prop('disabled', true);
+  }
+  $('.caso_pos_name').text(cpn);
   
   $('#fez_teste').click(function() {
     switchActivate($('#fez-teste-wrapper'));
   });
   
   $('#tem_doenca_cronica').click(function () {
-    switchActivate($('#doenca-cronica-wrapper'), false);
+    $('#doenca-cronica-wrapper').toggle();
   });
-
+  
+  
   $('#tem_sintomas').click(function () {
     var $wrapper = $('#sintomas-wrapper');
     var dataInput = $('#data_de_inicio_de_sintomas');
-    switchActivate($wrapper, false);
-
+    $wrapper.toggle();
+    
     if ($wrapper.is(":visible")) {
       dataInput.attr('required', true);
     } else {
@@ -42,79 +50,93 @@ $(document).ready(function() {
     }
     
   });
+  
+  
+  
 });
 
+function validateCheckBoxGroup($wrapper) {
+  var ipt = $wrapper.find('input[type=checkbox]')[0];
+  if ($wrapper.is(":visible")) {
+    var checked = $wrapper.find('input[type=checkbox]:checked').length;
+    if (!checked) {
+      ipt.setCustomValidity("Pelo menos um dos campos tem de ser assinalado");
+    } else {
+      ipt.setCustomValidity("");
+    }
+  } else {
+    ipt.setCustomValidity("");
+  }
+}
+
 function submitForm(ev) {
+  // run custom validity
+  validateCheckBoxGroup($('#sintomas-wrapper'));
+  validateCheckBoxGroup($('#doenca-cronica-wrapper'));
+  
   var form = $('#formulario-contacto');
   if (!form[0].checkValidity()) {
     return false;
   }
+  
   ev.preventDefault();
   addLoadingStatus(ev);
-
+  
+  // validate params
+  var case_guid = getParams().get('case_guid');
+  var contact_guid = getParams().get('contact_guid');
+  var id = getParams().get('id');
+  //if (!case_guid || !contact_guid || !id) return false;
+  
   var arrayData = form.serializeArray();
   var payload = {};
 
-  // Obter guid do endereço e adicionar ao payload
-  payload.casehash = getParams().get('guid');
+  // Obter guids e ids do endereço e adicionar ao payload
+  payload.id = parseInt(id);
+  payload.case_guid = case_guid;
+  payload.contact_guid = contact_guid;
   
-  // temos de adicionar todos os switches (checkboxes) primeiro
+  // temos de adicionar todos os switches (checkboxes) primeiro e meter a falso
   form.find('input[type=checkbox]').each(function() {
     var key = $(this).attr('name');
     payload[key] = false;
   });
-
-  console.log(payload);
-  console.log(JSON.stringify(payload));
-  return;
   
   arrayData.forEach(function(item) {
+    var p;
     // adicionar cada uns dos fields referentes ao paciente
     if (!item.name.match(/^contacto_/)) {
-      var val;
+      var val = item.value;
+      if (val === 'on') {
+        val = true;
+      } else if (val === 'off') {
+        val = false;
+      }
+      
       // transformar num utente em inteiro
       switch(item.name) {
 
         case 'num_utente':
+        case 'cpostal4':
           val = parseInt(item.value);
           break;
-
+        case 'resultado_exame':
+          val = (item.value === "" || item.value === null) ? 0 : parseInt(item.value);
+          break;
         case 'sexo':
           val = item.value === 'masculino' ? 0 : 1;
           break;
-
-        case 'profissional_de_lar':
-        case 'profissional_de_saude':
-          val = item.value === 'on';
-          break;
-        default:
-          val = item.value;
       }
       payload[item.name] = val;
     }
   });
-
-  // validar boleanos
-
-  for (var i = 0; i < contactos.length; i = i + 4) {
-    if (contactos[i].value && contactos[i + 1].value) {
-      // apenas processa info se tiver nome e contacto telefonico
-      var contact = {
-        c_nome: contactos[i].value,
-        c_tel: contactos[i + 1].value,
-        c_email: contactos[i + 2].value,
-        c_data_contacto: contactos[i + 3].value
-      }
-      payload.contactos.push(contact);
-    }
-  }
-
+  
   // para testar, abrir a consola no browser e descomentar as 2 linhas abaixo
   //console.log(payload);
   //console.log(JSON.stringify(payload));
-  //return;
+  //return true;
 
-  var url = config.form1.url;
+  var url = config.form2.url;
 
   var rqt = $.ajax({
     url: url,
@@ -129,6 +151,7 @@ function submitForm(ev) {
 
   rqt.done(function (response) {
     // dar feedback ao utente
+    console.log('cool');
     window.location.href = '../responses/sucesso.html';
   });
 

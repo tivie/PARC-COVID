@@ -58,7 +58,7 @@
                 <div class="form-group required">
                     <label for="nome_utente">Nome:</label>
                     <input name="nome_utente" id="nome_utente" type="text" class="form-control" required>
-                    <small id="nomeHelp" class="form-text text-muted">Texto de ajuda sobre o nome</small>
+                    <small id="nomeHelp" class="form-text text-muted">Nome completo conforme BI/CC</small>
                 </div>
 
                 <div class="form-group required">
@@ -76,16 +76,16 @@
                 </div>
 
                 <div class="form-group required">
-                    <label for="cartao_cidadao">Número do Cartão de Cidadão/ Título de Residência:</label>
+                    <label for="cartao_cidadao">Número do Cartão de Cidadão/ BI/ Título de Residência:</label>
                     <input name="cartao_cidadao" id="cartao_cidadao" type="number" class="form-control" required>
                     <small id="ccHelp" class="form-text text-muted">Número do Cartão de Cidadão, Passaporte ou título
                         de residência. Se não possuir nenhum destes documentos identificativos, escreva 1.</small>
                 </div>
 
                 <div class="form-group required">
-                    <label for="data_validade_cc">Data de Validade do CC:</label>
+                    <label for="data_validade_cc">Data de Validade do documento de identificação:</label>
                     <input name="data_validade_cc" id="data_validade_cc" type="date" class="form-control">
-                    <small id="data_validade_ccHelp" class="form-text text-muted">Campo não obrigatório</small>
+                    <small id="data_validade_ccHelp" class="form-text text-muted">Data de validade do BI/CC/documento de identificação</small>
                 </div>
 
                 <div class="form-group required">
@@ -110,6 +110,22 @@
 
             </fieldset>
 
+            <fieldset id="contacto-contacto">
+                <legend>Contacto</legend>
+
+                <div class="form-group required">
+                    <label for="telefone">Telefone:</label>
+                    <input name="telefone" id="telefone" type="text" class="form-control" required>
+                    <small class="form-text text-muted">Número de contacto telefónico, de preferência telemóvel</small>
+                </div>
+
+                <div class="form-group required">
+                    <label for="email">Email:</label>
+                    <input name="email" id="email" type="email" class="form-control" required>
+                    <small class="form-text text-muted">Endereço de email válido. Servirá para enviar toda a documentação necessária</small>
+                </div>
+            </fieldset>
+            
             <fieldset id="morada-fieldset">
 
                 <legend>Morada de Isolamento</legend>
@@ -233,7 +249,7 @@
                     </div>
                     <div class="form-group required">
                         <label for="resultado_exame">Resultado do teste:</label>
-                        <select id="resultado_exame" class="form-control">
+                        <select name="resultado_exame" id="resultado_exame" class="form-control">
                             <option hidden disabled selected value> -- seleccione uma opção --</option>
                             <option value="1">Positivo</option>
                             <option value="2">Negativo</option>
@@ -422,9 +438,9 @@
 
                 <div class="form-group required">
                     <label for="exp_contexto">Em que contexto esteve com o caso positivo?</label>
-                    <select id="exp_contexto" class="form-control" required>
+                    <select name="exp_contexto" id="exp_contexto" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
-                        <option value="co-habitação">Cohabitante</option>
+                        <option value="Co-habitação">Cohabitante</option>
                         <option value="Familiar">Familiar</option>
                         <option value="Social">Social</option>
                         <option value="Comunitário">Comunitário</option>
@@ -443,7 +459,7 @@
 
                 <div class="form-group required">
                     <label for="exp_tempo">Quanto tempo esteve com o caso positivo?</label>
-                    <select id="exp_tempo" class="form-control" required>
+                    <select name="exp_tempo" id="exp_tempo" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="Menos de 15 minutos">Menos de 15 minutos</option>
                         <option value="Entre 15 minutos e 1 hora">Entre 15 minutos e 1 hora</option>
@@ -457,7 +473,7 @@
 
                 <div class="form-group required">
                     <label for="exp_local">Em que tipo de local esteve com o caso positivo?</label>
-                    <select id="exp_local" class="form-control" required>
+                    <select name="exp_local" id="exp_local" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="Ambiente Aberto">Espaço Aberto (rua)</option>
                         <option value="Ambiente Fechado">Espaço Fechado (dentro de casa, sala de reuniões, cinema,
@@ -472,7 +488,7 @@
 
                 <div class="form-group required">
                     <label for="exp_distancia">A que distância esteve do caso positivo?</label>
-                    <select id="exp_distancia" class="form-control" required>
+                    <select name="exp_distancia" id="exp_distancia" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="Menos de 1 metro">Menos de 1 metro</option>
                         <option value="Entre 1 a 2 metros">Entre 1 a 2 metros</option>
@@ -485,7 +501,7 @@
 
                 <div class="form-group required">
                     <label for="exp_mascara_contacto">Você usou máscara?</label>
-                    <select id="exp_mascara_contacto" class="form-control" required>
+                    <select name="exp_mascara_contacto" id="exp_mascara_contacto" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="O contactante usou máscara social">Sim, Máscara social (de pano)</option>
                         <option value="O contactante usou máscara cirúrgica">Sim, Máscara cirúrgica (de médico)</option>
@@ -504,7 +520,7 @@
 
                 <div class="form-group required">
                     <label for="exp_mascara_index">O caso positivo usou máscara?</label>
-                    <select id="exp_mascara_index" class="form-control" required>
+                    <select name="exp_mascara_index" id="exp_mascara_index" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="O caso index usou máscara social">Sim, máscara social (de pano)</option>
                         <option value="O caso index usou máscara cirúrgica">Sim, máscara cirúrgica (de médico)</option>
