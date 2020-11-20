@@ -85,6 +85,7 @@ function getParams() {
 function switchActivate($wrapper, makeRequired) {
   makeRequired = !!makeRequired || true;
   var input = $wrapper.find('input');
+  var select = $wrapper.find('select');
   $wrapper.toggle();
 
   if (!makeRequired) return;
@@ -93,6 +94,12 @@ function switchActivate($wrapper, makeRequired) {
     input.attr('required', true);
   } else {
     input.attr('required', false);
+    select.prop('selectedIndex',0);
+    if (input.attr('type') === 'checkbox') {
+      input.prop('checked',false);
+    } else {
+      input.val('');
+    }
   }
 }
 

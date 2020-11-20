@@ -34,10 +34,20 @@ $(document).ready(function() {
   });
   
   $('#tem_doenca_cronica').click(function () {
-    $('#doenca-cronica-wrapper').toggle();
+    var $wrapper = $('#doenca-cronica-wrapper');
+    $wrapper.toggle();
+    
+    if ($wrapper.is(":hidden")) {
+      $wrapper.find('input').each( function() {
+        if ($(this).attr('type')  === 'checkbox') {
+          $(this).prop('checked',false);
+        } else {
+          $(this).val('')
+        }
+      });
+    }
   });
-  
-  
+
   $('#tem_sintomas').click(function () {
     var $wrapper = $('#sintomas-wrapper');
     var dataInput = $('#data_de_inicio_de_sintomas');
@@ -47,8 +57,15 @@ $(document).ready(function() {
       dataInput.attr('required', true);
     } else {
       dataInput.attr('required', false);
+      
+      $wrapper.find('input').each( function() {
+        if ($(this).attr('type')  === 'checkbox') {
+          $(this).prop('checked',false);
+        } else {
+          $(this).val('')
+        }
+      });
     }
-    
   });
   
   
@@ -116,24 +133,43 @@ function submitForm(ev) {
       // transformar num utente em inteiro
       switch(item.name) {
 
+        case 'data_do_exame':
+        case 'data_de_inicio_de_sintomas':
+        case 'resultado_exame':
+          val = (item.value === "" || item.value === null) ? null : item.value;
+          break;
         case 'num_utente':
         case 'cpostal4':
           val = parseInt(item.value);
           break;
-        case 'resultado_exame':
-          val = (item.value === "" || item.value === null) ? 0 : parseInt(item.value);
-          break;
         case 'sexo':
           val = item.value === 'masculino' ? 0 : 1;
           break;
+          
+        case 'nome_do_lar':
+        case 'instituicao_de_saude':
+          val = (item.value === "" || item.value === null) ? null : item.value;
+          break;
       }
-      payload[item.name] = val;
+      if (val !== null) {
+        payload[item.name] = val;
+      }
     }
   });
   
+  // temos as propriedades não obrigatorias, para o flows não reclamar, vamos remove-las
+  if (payload.fez_teste === false) {
+    delete payload.data_do_exame;
+    delete payload.resultado_exame;
+  }
+  
+  if (payload.tem_sintomas === false) {
+    delete payload.data_de_inicio_de_sintomas;
+  }
+  
   // para testar, abrir a consola no browser e descomentar as 2 linhas abaixo
-  //console.log(payload);
-  //console.log(JSON.stringify(payload));
+  console.log(payload);
+  console.log(JSON.stringify(payload));
   //return true;
 
   var url = config.form2.url;
@@ -160,6 +196,6 @@ function submitForm(ev) {
     button.disabled = false;
     button.children[0].classList.add("d-none");
     console.log(xhr);
-    alert(xhr.responseJSON.message);
+    alert(xhr.responseJSON.error.message);
   });
 }
