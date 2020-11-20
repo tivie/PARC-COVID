@@ -115,6 +115,6 @@ function submitForm(ev) {
     button.disabled = false;
     button.children[0].classList.add("d-none");
     console.log(xhr);
-    alert(xhr.responseJSON.message);
+    alert(xhr.responseJSON.error.message);
   });
 }
