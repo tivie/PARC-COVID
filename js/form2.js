@@ -151,9 +151,7 @@ function submitForm(ev) {
           val = (item.value === "" || item.value === null) ? null : item.value;
           break;
       }
-      if (val !== null) {
-        payload[item.name] = val;
-      }
+      payload[item.name] = val;
     }
   });
   
