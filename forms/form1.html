@@ -121,48 +121,113 @@
                         isolamento</b>,
                         e não a morada oficial/fiscal</small>
                 </div>
-
-                <div class="form-row form-group">
-                    <div class="col-xl-4 form-inline">
-                        <label class="required-here" for="cpostal4">Código-postal:</label>
-                        <input name="cpostal4" id="cpostal4" type="text" class="form-control" pattern="[0-9]{4}"
-                               required>
-                        <label for="cpostal3" class="no-required">&nbsp;-&nbsp;</label>
-                        <input name="cpostal3" id="cpostal3" type="text" class="form-control" pattern="[0-9]{3}"
-                               required>
-                    </div>
-
-                    <div class="col-xl-4 form-inline">
-                        <label for="localidade">Localidade:</label>
-                        <input name="localidade" id="localidade" type="text" class="form-control" required>
-                    </div>
-
-                    <div class="col-xl-4 form-inline">
-                        <label for="freguesia">Freguesia:</label>
-                        <input name="freguesia" id="freguesia" type="text" class="form-control" required>
-                    </div>
+                
+                <div class="form-group form-inline">
+                    <label class="required-here" for="cpostal4">Código-postal:</label>
+                    <input name="cpostal4" id="cpostal4" type="text" class="form-control" pattern="[0-9]{4}" required>
+                    <label for="cpostal3" class="no-required">&nbsp;-&nbsp;</label>
+                    <input name="cpostal3" id="cpostal3" type="text" class="form-control" pattern="[0-9]{3}" required>
                 </div>
 
-                <div class="form-inline form-group required">
-                    <div class="form-group">
+                <div class="form-group form-inline required">
+                    <div class="form-group ">
                         <label for="concelho-select">Concelho:</label>
                         <select id="concelho-select" class="form-control" required>
                             <option hidden disabled selected value> -- seleccione uma opção --</option>
-                            <option value="Batalha">Batalha</option>
-                            <option value="Leiria">Leiria</option>
-                            <option value="Marinha Grande">Marinha Grande</option>
-                            <option value="Pombal">Pombal</option>
-                            <option value="Porto de Mós">Porto de Mós</option>
+                            <option value="BATALHA">Batalha</option>
+                            <option value="LEIRIA">Leiria</option>
+                            <option value="MARINHA GRANDE">Marinha Grande</option>
+                            <option value="POMBAL">Pombal</option>
+                            <option value="PORTO DE MOS">Porto de Mós</option>
                             <option value="outro">Outro...</option>
                         </select>
                     </div>
 
                     <div id="concelho-wrapper" class="form-group" style="display: none">
-                        <label for="concelho">Concelho:</label>
                         <input name="concelho" id="concelho" type="text" class="form-control">
                     </div>
-
                 </div>
+
+                <div class="form-group required" id="freguesia-wrapper">
+                    <label for="freguesia">Freguesia:</label>
+                        
+                    <select id="freguesia-select" class="form-control" style="display: none">
+                        <option hidden disabled selected value> -- seleccione uma opção --</option>
+                        <option value="BATALHA" data-concelho="BATALHA">BATALHA</option>
+                        <option value="REGUENGO DO FETAL" data-concelho="BATALHA">REGUENGO DO FETAL</option>
+                        <option value="S. MAMEDE" data-concelho="BATALHA">S. MAMEDE</option>
+                        <option value="GOLPILHEIRA" data-concelho="BATALHA">GOLPILHEIRA</option>
+                        <option value="AMOR" data-concelho="LEIRIA">AMOR</option>
+                        <option value="ARRABAL" data-concelho="LEIRIA">ARRABAL</option>
+                        <option value="AZOIA" data-concelho="LEIRIA">AZOIA</option>
+                        <option value="BAROSA" data-concelho="LEIRIA">BAROSA</option>
+                        <option value="BARREIRA" data-concelho="LEIRIA">BARREIRA</option>
+                        <option value="BOA VISTA" data-concelho="LEIRIA">BOA VISTA</option>
+                        <option value="CARANGUEJEIRA" data-concelho="LEIRIA">CARANGUEJEIRA</option>
+                        <option value="CARVIDE" data-concelho="LEIRIA">CARVIDE</option>
+                        <option value="COIMBRÃO" data-concelho="LEIRIA">COIMBRÃO</option>
+                        <option value="COLMEIAS" data-concelho="LEIRIA">COLMEIAS</option>
+                        <option value="CORTES" data-concelho="LEIRIA">CORTES</option>
+                        <option value="LEIRIA" data-concelho="LEIRIA">LEIRIA</option>
+                        <option value="MACEIRA" data-concelho="LEIRIA">MACEIRA</option>
+                        <option value="MARRAZES" data-concelho="LEIRIA">MARRAZES</option>
+                        <option value="MILAGRES" data-concelho="LEIRIA">MILAGRES</option>
+                        <option value="MONTE REAL" data-concelho="LEIRIA">MONTE REAL</option>
+                        <option value="MONTE REDONDO" data-concelho="LEIRIA">MONTE REDONDO</option>
+                        <option value="ORTIGOSA" data-concelho="LEIRIA">ORTIGOSA</option>
+                        <option value="PARCEIROS" data-concelho="LEIRIA">PARCEIROS</option>
+                        <option value="POUSOS" data-concelho="LEIRIA">POUSOS</option>
+                        <option value="REGUEIRA DE PONTES" data-concelho="LEIRIA">REGUEIRA DE PONTES</option>
+                        <option value="SANTA CATARINA DA SERRA" data-concelho="LEIRIA">SANTA CATARINA DA SERRA</option>
+                        <option value="SANTA EUFEMIA" data-concelho="LEIRIA">SANTA EUFEMIA</option>
+                        <option value="SOUTO DA CARPALHOSA" data-concelho="LEIRIA">SOUTO DA CARPALHOSA</option>
+                        <option value="BAJOUCA" data-concelho="LEIRIA">BAJOUCA</option>
+                        <option value="BIDOEIRA DE CIMA" data-concelho="LEIRIA">BIDOEIRA DE CIMA</option>
+                        <option value="MEMORIA" data-concelho="LEIRIA">MEMORIA</option>
+                        <option value="CARREIRA" data-concelho="LEIRIA">CARREIRA</option>
+                        <option value="CHAINÇA" data-concelho="LEIRIA">CHAINÇA</option>
+                        <option value="MARINHA GRANDE" data-concelho="MARINHA GRANDE">MARINHA GRANDE</option>
+                        <option value="VIEIRA DE LEIRIA" data-concelho="MARINHA GRANDE">VIEIRA DE LEIRIA</option>
+                        <option value="MOITA" data-concelho="MARINHA GRANDE">MOITA</option>
+                        <option value="ABIUL" data-concelho="POMBAL">ABIUL</option>
+                        <option value="ALBERGARIA DOS DOZE" data-concelho="POMBAL">ALBERGARIA DOS DOZE</option>
+                        <option value="ALMAGREIRA" data-concelho="POMBAL">ALMAGREIRA</option>
+                        <option value="CARNIDE" data-concelho="POMBAL">CARNIDE</option>
+                        <option value="CARRIÇO" data-concelho="POMBAL">CARRIÇO</option>
+                        <option value="LOURIÇAL" data-concelho="POMBAL">LOURIÇAL</option>
+                        <option value="MATA MOURISCA" data-concelho="POMBAL">MATA MOURISCA</option>
+                        <option value="PELARIGA" data-concelho="POMBAL">PELARIGA</option>
+                        <option value="POMBAL" data-concelho="POMBAL">POMBAL</option>
+                        <option value="REDINHA" data-concelho="POMBAL">REDINHA</option>
+                        <option value="SANTIAGO DE LITEM" data-concelho="POMBAL">SANTIAGO DE LITEM</option>
+                        <option value="S. SIMÃO DE LITEM" data-concelho="POMBAL">S. SIMÃO DE LITEM</option>
+                        <option value="VERMOIL" data-concelho="POMBAL">VERMOIL</option>
+                        <option value="VILA CÃ" data-concelho="POMBAL">VILA CÃ</option>
+                        <option value="MEIRINHAS" data-concelho="POMBAL">MEIRINHAS</option>
+                        <option value="GUIA" data-concelho="POMBAL">GUIA</option>
+                        <option value="ILHA" data-concelho="POMBAL">ILHA</option>
+                        <option value="ALCARIA" data-concelho="PORTO DE MOS">ALCARIA</option>
+                        <option value="ALQUEIDÃO DA SERRA" data-concelho="PORTO DE MOS">ALQUEIDÃO DA SERRA</option>
+                        <option value="ALVADOS" data-concelho="PORTO DE MOS">ALVADOS</option>
+                        <option value="ARRIMAL" data-concelho="PORTO DE MOS">ARRIMAL</option>
+                        <option value="CALVARIA DE CIMA" data-concelho="PORTO DE MOS">CALVARIA DE CIMA</option>
+                        <option value="JUNCAL" data-concelho="PORTO DE MOS">JUNCAL</option>
+                        <option value="MENDIGA" data-concelho="PORTO DE MOS">MENDIGA</option>
+                        <option value="MIRA DE AIRE" data-concelho="PORTO DE MOS">MIRA DE AIRE</option>
+                        <option value="PEDREIRAS" data-concelho="PORTO DE MOS">PEDREIRAS</option>
+                        <option value="S. BENTO" data-concelho="PORTO DE MOS">S. BENTO</option>
+                        <option value="PORTO DE MOS (S. JOÃO BAPTISTA)" data-concelho="PORTO DE MOS">PORTO DE MOS (S. JOÃO BAPTISTA)</option>
+                        <option value="PORTO DE MOS (S. PEDRO)" data-concelho="PORTO DE MOS">PORTO DE MOS (S. PEDRO)</option>
+                        <option value="SERRO VENTOSO" data-concelho="PORTO DE MOS">SERRO VENTOSO</option>
+                    </select>
+                    <input name="freguesia" id="freguesia" type="text" class="form-control">
+                </div>
+
+                <div class="form-group required">
+                    <label for="localidade">Localidade:</label>
+                    <input name="localidade" id="localidade" type="text" class="form-control" required>
+                </div>
+
             </fieldset>
 
             <fieldset id="dados-profissionais-fieldset">

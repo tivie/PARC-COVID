@@ -124,11 +124,11 @@ $(document).ready(function () {
       items.children('input').each(function() {
         var item = $(this);
         if (!item.is(':checkbox')) {
-          item.attr('required', true);
+          item.prop('required', true);
         }
       });
     } else {
-      items.children('input').attr('required', false);
+      items.children('input').prop('required', false);
     }
   });
 
@@ -136,22 +136,48 @@ $(document).ready(function () {
 
     var wrapper = $('#concelho-wrapper');
     var input = $('#concelho');
+    var freg = $('#freguesia');
+    var fregSelect = $('#freguesia-select');
+    var selectedConcelho = this.value;
 
-    if (this.value === 'outro') {
+    $('#freguesia-wrapper').show();
+
+    fregSelect.find("option").hide();
+    
+    if (selectedConcelho === 'outro') {
       input.val('');
+      freg.val('');
+      freg.show();
+      fregSelect.hide();
       wrapper.show();
     } else {
       input.val(this.value);
+      freg.hide();
       wrapper.hide();
+
+      fregSelect.find("option")
+        .filter(function() {
+          return $(this).data('concelho') === selectedConcelho}
+        )
+        .show();
+      
+      fregSelect.prop('selectedIndex',0);
+      fregSelect.prop('required', true);
+      fregSelect.show();
     }
 
     if (input.is(":visible")) {
-      input.attr('required', true);
+      input.prop('required', true);
     } else {
-      input.attr('required', false);
+      input.prop('required', false);
     }
+    
   });
-
+  
+  $('#freguesia-select').change(function() {
+    $('#freguesia').val(this.value);
+  })
+  
   $('#profissional_de_lar').click(function() {
     switchActivate($('#nome-do-lar-wrapper'));
   });

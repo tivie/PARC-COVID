@@ -78,3 +78,7 @@ fieldset legend {
 #cpostal4, #cpostal3 {
     max-width: 100px;
 }
+
+#concelho-wrapper {
+    margin-left: 10px;
+}
