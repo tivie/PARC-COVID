@@ -135,8 +135,10 @@ function submitForm(ev) {
 
         case 'data_do_exame':
         case 'data_de_inicio_de_sintomas':
-        case 'resultado_exame':
           val = (item.value === "" || item.value === null) ? null : item.value;
+          break;
+        case 'resultado_exame':
+            val = (item.value === "" || item.value === null) ? null : parseInt(item.value);
           break;
         case 'num_utente':
         case 'cpostal4':
@@ -168,7 +170,7 @@ function submitForm(ev) {
   // para testar, abrir a consola no browser e descomentar as 2 linhas abaixo
   console.log(payload);
   console.log(JSON.stringify(payload));
-  //return true;
+  return true;
 
   var url = config.form2.url;
 
