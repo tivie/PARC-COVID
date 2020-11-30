@@ -20,19 +20,24 @@
  */
 
 // todo passar isto para dentro do document ready e mudar para jquery
+/**
+ * 
+ * @param {event} ev
+ * @returns {boolean}
+ */
 function submitForm(ev) {
-  
-  addLoadingStatus(ev);
-  
+
   var form = $('#formulario-caso-positivo');
   var arrayData = form.serializeArray();
   var contactos;
   var payload = {};
   var params = getParams();
-  
+  var button = document.getElementById('enviarform');
+
+  addLoadingStatus(button);
   
   if (!form[0].checkValidity()) {
-    removeLoadingStatus(ev);
+    removeLoadingStatus(button);
     return false;
   }
   
@@ -88,7 +93,7 @@ function submitForm(ev) {
 
   if (config.debug) {
     console.log(JSON.stringify(payload));
-    removeLoadingStatus(ev);
+    removeLoadingStatus(button);
     return false;
   }
 
@@ -105,13 +110,14 @@ function submitForm(ev) {
     }
   });
 
-  rqt.done(function (response) {
+  rqt.done(function () {
     // dar feedback ao utente
+    removeLoadingStatus(button);
     window.location.href = '../responses/sucesso.html';
   });
 
-  rqt.fail(function (xhr, status) {
-    removeLoadingStatus(ev);
+  rqt.fail(function (xhr) {
+    removeLoadingStatus(button);
     alert(xhr.responseJSON.error.message);
   });
 }

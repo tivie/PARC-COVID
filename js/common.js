@@ -57,14 +57,22 @@ function encodeEmailAddress(mail) {
   }
 })();
 
-function addLoadingStatus(ev) {
-  ev.currentTarget.disabled = true;
-  ev.currentTarget.children[0].classList.remove("d-none");
+/**
+ *
+ * @param {Element} button
+ */
+function addLoadingStatus(button) {
+  button.disabled = true;
+  button.children[0].classList.remove("d-none");
 }
 
-function removeLoadingStatus(ev) {
-  ev.currentTarget.disabled = false;
-  ev.currentTarget.children[0].classList.add("d-none");
+/**
+ * 
+ * @param {Element} button
+ */
+function removeLoadingStatus(button) {
+  button.disabled = false;
+  button.children[0].classList.add("d-none");
 }
 
 function removeContact(ev) {

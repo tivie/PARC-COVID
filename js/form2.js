@@ -99,8 +99,9 @@ function submitForm(ev) {
   var case_guid = getParams().get('case_guid');
   var contact_guid = getParams().get('contact_guid');
   var id = getParams().get('id');
+  var button = document.getElementById('enviarform');
   
-  addLoadingStatus(ev);
+  addLoadingStatus(button);
   
   // run custom validity
   validateCheckBoxGroup($('#sintomas-wrapper'));
@@ -111,7 +112,7 @@ function submitForm(ev) {
   });
 
   if (!form[0].checkValidity()) {
-    removeLoadingStatus(ev);
+    removeLoadingStatus(button);
     return false;
   }
   
@@ -193,7 +194,7 @@ function submitForm(ev) {
   
   if (config.debug) {
     console.log(JSON.stringify(payload));
-    removeLoadingStatus(ev);
+    removeLoadingStatus(button);
     return false;
   }
 
@@ -210,13 +211,13 @@ function submitForm(ev) {
     }
   });
 
-  rqt.done(function (response) {
+  rqt.done(function () {
     // dar feedback ao utente
     window.location.href = '../responses/sucesso.html';
   });
 
-  rqt.fail(function (xhr, status) {
-    removeLoadingStatus(ev);
+  rqt.fail(function (xhr) {
+    removeLoadingStatus(button);
     alert(xhr.responseJSON.error.message);
   });
 }

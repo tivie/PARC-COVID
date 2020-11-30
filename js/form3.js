@@ -25,11 +25,12 @@ function submitForm3(ev) {
   var contactos;
   var payload = {};
   var params = getParams();
+  var button = document.getElementById('enviarform');
 
   addLoadingStatus(ev);
   
   if (!form[0].checkValidity()) {
-    removeLoadingStatus(ev);
+    removeLoadingStatus(button);
     return false;
   }
   ev.preventDefault();
@@ -58,7 +59,7 @@ function submitForm3(ev) {
 
   if (config.debug) {
     console.log(JSON.stringify(payload));
-    removeLoadingStatus(ev);
+    removeLoadingStatus(button);
     return false;
   }
   
@@ -75,13 +76,13 @@ function submitForm3(ev) {
     }
   });
 
-  rqt.done(function (response) {
+  rqt.done(function () {
     // dar feedback ao utente
     window.location.href = '../responses/sucesso.html';
   });
 
-  rqt.fail(function (xhr, status) {
-    removeLoadingStatus(ev);
+  rqt.fail(function (xhr) {
+    removeLoadingStatus(button);
     alert(xhr.responseJSON.error.message);
   });
 }
