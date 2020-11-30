@@ -1,0 +1,379 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://covid.aces-pl.pt/iq/schemas/form2.schema.json",
+  "title": "Form2 Schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "title": "id",
+      "type": "integer"
+    },
+    "case_guid": {
+      "$id": "#/properties/case_guid",
+      "type": "string",
+      "title": "case_guid"
+    },
+    "contact_guid": {
+      "$id": "#/properties/contact_guid",
+      "type": "string",
+      "title": "contact_guid"
+    },
+    "profissional_de_lar": {
+      "$id": "#/properties/profissional_de_lar",
+      "type": "boolean",
+      "title": "profissional_de_lar"
+    },
+    "profissional_de_saude": {
+      "$id": "#/properties/profissional_de_saude",
+      "type": "boolean",
+      "title": "profissional_de_saude"
+    },
+    "fez_teste": {
+      "$id": "#/properties/fez_teste",
+      "type": "boolean",
+      "title": "fez_teste"
+    },
+    "tem_doenca_cronica": {
+      "$id": "#/properties/tem_doenca_cronica",
+      "type": "boolean",
+      "title": "tem_doenca_cronica"
+    },
+    "dpoc": {
+      "$id": "#/properties/dpoc",
+      "type": "boolean",
+      "title": "dpoc"
+    },
+    "asma": {
+      "$id": "#/properties/asma",
+      "type": "boolean",
+      "title": "asma"
+    },
+    "ic": {
+      "$id": "#/properties/ic",
+      "type": "boolean",
+      "title": "ic"
+    },
+    "diabetes": {
+      "$id": "#/properties/diabetes",
+      "type": "boolean",
+      "title": "diabetes"
+    },
+    "hipertensao": {
+      "$id": "#/properties/hipertensao",
+      "type": "boolean",
+      "title": "hipertensao"
+    },
+    "d_hc": {
+      "$id": "#/properties/d_hc",
+      "type": "boolean",
+      "title": "d_hc"
+    },
+    "d_rc": {
+      "$id": "#/properties/d_rc",
+      "type": "boolean",
+      "title": "d_rc"
+    },
+    "neoplasia_ativa": {
+      "$id": "#/properties/neoplasia_ativa",
+      "type": "boolean",
+      "title": "neoplasia_ativa"
+    },
+    "outra_imunossupressao": {
+      "$id": "#/properties/outra_imunossupressao",
+      "type": "boolean",
+      "title": "outra_imunossupressao"
+    },
+    "tem_sintomas": {
+      "$id": "#/properties/tem_sintomas",
+      "type": "boolean",
+      "title": "tem_sintomas"
+    },
+    "febre": {
+      "$id": "#/properties/febre",
+      "type": "boolean",
+      "title": "febre"
+    },
+    "tosse": {
+      "$id": "#/properties/tosse",
+      "type": "boolean",
+      "title": "tosse"
+    },
+    "mialgias": {
+      "$id": "#/properties/mialgias",
+      "type": "boolean",
+      "title": "mialgias"
+    },
+    "cefaleias": {
+      "$id": "#/properties/cefaleias",
+      "type": "boolean",
+      "title": "cefaleias"
+    },
+    "astenia": {
+      "$id": "#/properties/astenia",
+      "type": "boolean",
+      "title": "astenia"
+    },
+    "dispneia": {
+      "$id": "#/properties/dispneia",
+      "type": "boolean",
+      "title": "dispneia"
+    },
+    "odinofagia": {
+      "$id": "#/properties/odinofagia",
+      "type": "boolean",
+      "title": "odinofagia"
+    },
+    "hipoanosmia": {
+      "$id": "#/properties/hipoanosmia",
+      "type": "boolean",
+      "title": "hipoanosmia"
+    },
+    "disgeusia": {
+      "$id": "#/properties/disgeusia",
+      "type": "boolean",
+      "title": "disgeusia"
+    },
+    "diarreia": {
+      "$id": "#/properties/diarreia",
+      "type": "boolean",
+      "title": "diarreia"
+    },
+    "dor_toracica": {
+      "$id": "#/properties/dor_toracica",
+      "type": "boolean",
+      "title": "dor_toracica"
+    },
+    "nome_utente": {
+      "$id": "#/properties/nome_utente",
+      "type": "string",
+      "title": "nome_utente"
+    },
+    "num_utente": {
+      "$id": "#/properties/num_utente",
+      "type": "integer",
+      "title": "num_utente"
+    },
+    "data_nascimento": {
+      "type": "string",
+      "format": "date"
+    },
+    "cartao_cidadao": {
+      "$id": "#/properties/cartao_cidadao",
+      "type": "string",
+      "title": "cartao_cidadao"
+    },
+    "data_validade_cc": {
+      "type": "string",
+      "format": "date"
+    },
+    "niss": {
+      "$id": "#/properties/niss",
+      "type": "string",
+      "title": "niss"
+    },
+    "sexo": {
+      "type": "integer",
+      "enum": [0, 1]
+    },
+    "morada": {
+      "$id": "#/properties/morada",
+      "type": "string",
+      "title": "morada"
+    },
+    "cpostal4": {
+      "type": "integer",
+      "title": "cpostal4"
+    },
+    "cpostal3": {
+      "type": "string",
+      "title": "cpostal3"
+    },
+    "localidade": {
+      "$id": "#/properties/localidade",
+      "type": "string",
+      "title": "localidade"
+    },
+    "freguesia": {
+      "$id": "#/properties/freguesia",
+      "type": "string",
+      "title": "freguesia"
+    },
+    "concelho": {
+      "$id": "#/properties/concelho",
+      "type": "string",
+      "title": "concelho"
+    },
+    "situacao-perante-emprego": {
+      "type": "string",
+      "title": "situacao-perante-emprego"
+    },
+    "profissao": {
+      "$id": "#/properties/profissao",
+      "type": "string",
+      "title": "profissao"
+    },
+    "nome_do_lar": {
+      "$id": "#/properties/nome_do_lar",
+      "type": ["string", "null"],
+      "title": "concelho"
+    },
+    "instituicao_de_saude": {
+      "$id": "#/properties/instituicao_de_saude",
+      "title": "instituicao_de_saude",
+      "type": ["string", "null"]
+    },
+    "data_de_contacto": {
+      "$id": "#/properties/data_de_contacto",
+      "title": "data_de_contacto",
+      "type": "string",
+      "format": "date"
+    },
+    "email": {
+      "$id": "#/properties/email",
+      "title": "email",
+      "type": "string",
+      "format": "email"
+    },
+    "exp_contexto": {
+      "$id": "#/properties/exp_contexto",
+      "title": "contexto de exposição",
+      "type": "string",
+      "enum": [
+        "Co-habitação",
+        "Familiar",
+        "Social",
+        "Comunitário",
+        "Laboral",
+        "Escolar",
+        "Lar",
+        "Hospitalar"
+      ]
+    },
+    "exp_tempo": {
+      "$id": "#/properties/exp_tempo",
+      "title": "tempo de exposição",
+      "type": "string",
+      "enum": [
+        "Entre 15 minutos e 1 hora",
+        "Menos de 15 minutos",
+        "Mais de 1 hora"
+      ]
+    },
+    "exp_local": {
+      "$id": "#/properties/exp_local",
+      "title": "local de exposição",
+      "type": "string",
+      "enum": [
+        "Ambiente Aberto",
+        "Ambiente Fechado"
+      ]
+    },
+    "exp_distancia": {
+      "$id": "#/properties/exp_distancia",
+      "title": "distancia de exposição",
+      "type": "string",
+      "enum": [
+        "Mais de 2 metros",
+        "Menos de 1 metro",
+        "Entre 1 a 2 metros"
+      ]
+    },
+    "exp_mascara_contacto": {
+      "$id": "#/properties/exp_mascara_contacto",
+      "title": "epi contacto",
+      "type": "string",
+      "enum": [
+        "O contactante NÃO usou nenhuma máscara",
+        "O contactante usou máscara social",
+        "O contactante usou máscara cirúrgica",
+        "O contactante usou máscara FFP2 ou equivalente"
+      ]
+    },
+    "exp_mascara_index": {
+      "$id": "#/properties/exp_mascara_index",
+      "title": "epi index",
+      "type": "string",
+      "enum": [
+        "O caso index NÃO usou nenhuma máscara",
+        "O caso index usou máscara social",
+        "O caso index usou máscara cirúrgica",
+        "O caso index usou máscara FFP2 ou equivalente"
+      ]
+    },
+    "telefone": {
+      "$id": "#/properties/telefone",
+      "type": "string",
+      "title": "telefone"
+    },
+    "resultado_exame": {
+      "$id": "#/properties/resultado_exame",
+      "title": "resultado_exame",
+      "type": "integer",
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "data_do_exame": {
+      "$id": "#/properties/data_do_exame",
+      "title": "data_do_exame",
+      "type": "string",
+      "format": "date"
+    },
+    "data_de_inicio_de_sintomas": {
+      "$id": "#/properties/data_de_inicio_de_sintomas",
+      "title": "data_de_inicio_de_sintomas",
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "id",
+    "case_guid",
+    "contact_guid",
+    "profissional_de_lar",
+    "profissional_de_saude",
+    "fez_teste",
+    "tem_doenca_cronica",
+    "dpoc",
+    "asma",
+    "ic",
+    "diabetes",
+    "hipertensao",
+    "d_hc",
+    "d_rc",
+    "neoplasia_ativa",
+    "outra_imunossupressao",
+    "tem_sintomas",
+    "febre",
+    "tosse",
+    "mialgias",
+    "cefaleias",
+    "astenia",
+    "dispneia",
+    "odinofagia",
+    "hipoanosmia",
+    "disgeusia",
+    "diarreia",
+    "dor_toracica",
+    "nome_utente",
+    "num_utente",
+    "data_nascimento",
+    "cartao_cidadao",
+    "data_validade_cc",
+    "niss",
+    "sexo",
+    "morada",
+    "cpostal4",
+    "cpostal3",
+    "localidade",
+    "freguesia",
+    "concelho",
+    "situacao-perante-emprego",
+    "data_de_contacto",
+    "exp_contexto",
+    "exp_tempo",
+    "exp_local",
+    "exp_distancia",
+    "exp_mascara_contacto",
+    "exp_mascara_index"
+  ]
+}

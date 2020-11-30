@@ -21,22 +21,20 @@
 
 // todo passar isto para dentro do document ready e mudar para jquery
 function submitForm(ev) {
-  var form = $('#formulario-caso-positivo');
-  if (!form[0].checkValidity()) {
-    return false;
-  }
-  ev.preventDefault();
+  
   addLoadingStatus(ev);
-
+  
+  var form = $('#formulario-caso-positivo');
   var arrayData = form.serializeArray();
   var contactos;
   var payload = {};
-
-  // primeiros 3 sao sempre do paciente
-  // remove os primeiros do arrayData
-  //var patient = arrayData.splice(0, 3);
-
-
+  
+  
+  if (!form[0].checkValidity()) {
+    removeLoadingStatus(ev);
+    return false;
+  }
+  
   // Obter hash do endereço e adicionar ao payload
   payload.casehash = window.location.hash.replace(/^#/, '');
   payload.contactos = [];
@@ -72,7 +70,7 @@ function submitForm(ev) {
     }
   });
 
-  // validar boleanos
+  ev.preventDefault();
   
   for (var i = 0; i < contactos.length; i = i + 4) {
     if (contactos[i].value && contactos[i + 1].value) {
@@ -87,10 +85,11 @@ function submitForm(ev) {
     }
   }
 
-  // para testar, abrir a consola no browser e descomentar as 2 linhas abaixo
-  //console.log(payload);
-  //console.log(JSON.stringify(payload));
-  //return;
+  if (config.debug) {
+    console.log(JSON.stringify(payload));
+    removeLoadingStatus(ev);
+    return false;
+  }
 
   var url = config.form1.url;
 
@@ -111,10 +110,7 @@ function submitForm(ev) {
   });
 
   rqt.fail(function (xhr, status) {
-    var button = document.getElementById('enviarform');
-    button.disabled = false;
-    button.children[0].classList.add("d-none");
-    console.log(xhr);
+    removeLoadingStatus(ev);
     alert(xhr.responseJSON.error.message);
   });
 }

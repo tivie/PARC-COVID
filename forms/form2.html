@@ -33,6 +33,9 @@
     <link rel="stylesheet" href="../css/common.css">
 
     <link rel="stylesheet" href="../css/form2.css">
+
+    <!-- polyfills -->
+    <script src="https://unpkg.com/@ungap/url-search-params@0.2.2/min.js"></script>
 </head>
 <body>
 
@@ -57,13 +60,13 @@
 
                 <div class="form-group required">
                     <label for="nome_utente">Nome:</label>
-                    <input name="nome_utente" id="nome_utente" type="text" class="form-control" required>
+                    <input name="nome_utente" data-schema-id="#/properties/nome_utente" id="nome_utente" type="text" class="form-control" required>
                     <small id="nomeHelp" class="form-text text-muted">Nome completo conforme BI/CC</small>
                 </div>
 
                 <div class="form-group required">
                     <label for="num_utente">Número de utente (SNS):</label>
-                    <input name="num_utente" id="num_utente" type="number" pattern="\d{9}" min="100000000"
+                    <input name="num_utente" data-schema-id="#/properties/num_utente" id="num_utente" type="number" pattern="\d{9}" min="100000000"
                            max="999999999"
                            class="form-control" required>
                     <small id="num_utenteHelp" class="form-text text-muted">Número de utente do SNS. Número composto
@@ -72,25 +75,25 @@
 
                 <div class="form-group required">
                     <label for="data_nascimento">Data de Nascimento:</label>
-                    <input name="data_nascimento" id="data_nascimento" type="date" class="form-control" required>
+                    <input name="data_nascimento" data-schema-id="#/properties/data_nascimento" id="data_nascimento" type="date" data-type="date" class="form-control" required>
                 </div>
 
                 <div class="form-group required">
                     <label for="cartao_cidadao">Número do Cartão de Cidadão/ BI/ Título de Residência:</label>
-                    <input name="cartao_cidadao" id="cartao_cidadao" type="number" class="form-control" required>
+                    <input name="cartao_cidadao" data-schema-id="#/properties/cartao_cidadao" id="cartao_cidadao" type="number" class="form-control" required>
                     <small id="ccHelp" class="form-text text-muted">Número do Cartão de Cidadão, Passaporte ou título
                         de residência. Se não possuir nenhum destes documentos identificativos, escreva 1.</small>
                 </div>
 
                 <div class="form-group required">
                     <label for="data_validade_cc">Data de Validade do documento de identificação:</label>
-                    <input name="data_validade_cc" id="data_validade_cc" type="date" class="form-control">
+                    <input name="data_validade_cc" data-schema-id="#/properties/data_validade_cc" id="data_validade_cc" type="date" data-type="date" class="form-control">
                     <small id="data_validade_ccHelp" class="form-text text-muted">Data de validade do BI/CC/documento de identificação</small>
                 </div>
 
                 <div class="form-group required">
                     <label for="niss">Número de identificação da Segurança Social:</label>
-                    <input name="niss" id="niss" type="number" class="form-control">
+                    <input name="niss" data-schema-id="#/properties/niss" id="niss" type="number" class="form-control">
                     <small id="nissHelp" class="form-text text-muted">Número de identificação da Segurança
                         Social</small>
                 </div>
@@ -98,7 +101,7 @@
                 <div class="form-group">
                     <span class="required-here">Sexo:</span>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sexo" id="sexo-masculino" value="masculino">
+                        <input class="form-check-input" type="radio" name="sexo" data-schema-id="#/properties/sexo" id="sexo-masculino" value="masculino">
                         <label class="form-check-label" for="sexo-masculino">Masculino</label>
                     </div>
 
@@ -115,13 +118,13 @@
 
                 <div class="form-group required">
                     <label for="telefone">Telefone:</label>
-                    <input name="telefone" id="telefone" type="text" class="form-control" required>
+                    <input name="telefone" data-schema-id="#/properties/telefone" id="telefone" type="text" class="form-control" required>
                     <small class="form-text text-muted">Número de contacto telefónico, de preferência telemóvel</small>
                 </div>
 
                 <div class="form-group required">
                     <label for="email">Email:</label>
-                    <input name="email" id="email" type="email" class="form-control" required>
+                    <input name="email" data-schema-id="#/properties/email" id="email" type="email" class="form-control" required>
                     <small class="form-text text-muted">Endereço de email válido. Servirá para enviar toda a documentação necessária</small>
                 </div>
             </fieldset>
@@ -132,7 +135,7 @@
 
                 <div class="form-group required">
                     <label for="morada">Morada:</label>
-                    <textarea name="morada" id="morada" class="form-control" required></textarea>
+                    <textarea name="morada" data-schema-id="#/properties/morada" id="morada" class="form-control" required></textarea>
                     <small id="localidadeHelp" class="form-text text-muted">
                         Morada <b>onde se encontra a fazer o isolamento</b>, e não a morada oficial/fiscal
                     </small>
@@ -140,9 +143,9 @@
 
                 <div class="form-group form-inline">
                     <label class="required-here" for="cpostal4">Código-postal:</label>
-                    <input name="cpostal4" id="cpostal4" type="text" class="form-control" pattern="[0-9]{4}" required>
+                    <input name="cpostal4" data-schema-id="#/properties/cpostal4" id="cpostal4" type="text" class="form-control" pattern="[0-9]{4}" required>
                     <label for="cpostal3" class="no-required">&nbsp;-&nbsp;</label>
-                    <input name="cpostal3" id="cpostal3" type="text" class="form-control" pattern="[0-9]{3}" required>
+                    <input name="cpostal3" data-schema-id="#/properties/cpostal3" id="cpostal3" type="text" class="form-control" pattern="[0-9]{3}" required>
                 </div>
 
                 <div class="form-group form-inline required">
@@ -160,7 +163,7 @@
                     </div>
 
                     <div id="concelho-wrapper" class="form-group" style="display: none">
-                        <input name="concelho" id="concelho" type="text" class="form-control">
+                        <input name="concelho" data-schema-id="#/properties/concelho" id="concelho" type="text" class="form-control">
                     </div>
                 </div>
 
@@ -236,12 +239,12 @@
                         <option value="PORTO DE MOS (S. PEDRO)" data-concelho="PORTO DE MOS">PORTO DE MOS (S. PEDRO)</option>
                         <option value="SERRO VENTOSO" data-concelho="PORTO DE MOS">SERRO VENTOSO</option>
                     </select>
-                    <input name="freguesia" id="freguesia" type="text" class="form-control">
+                    <input name="freguesia" data-schema-id="#/properties/freguesia" id="freguesia" type="text" class="form-control" required>
                 </div>
 
                 <div class="form-group required">
                     <label for="localidade">Localidade:</label>
-                    <input name="localidade" id="localidade" type="text" class="form-control" required>
+                    <input name="localidade" data-schema-id="#/properties/localidade" id="localidade" type="text" class="form-control" required>
                 </div>
                 
             </fieldset>
@@ -251,7 +254,7 @@
 
                 <div class="form-group required">
                     <label for="situacao-perante-emprego">Situação perante emprego:</label>
-                    <select name="situacao-perante-emprego" id="situacao-perante-emprego" class="form-control" required>
+                    <select name="situacao-perante-emprego" data-schema-id="#/properties/situacao-perante-emprego" id="situacao-perante-emprego" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="empregado">Empregado</option>
                         <option value="estudante">Estudante</option>
@@ -262,12 +265,12 @@
 
                 <div class="form-group form-dados-prof-item required" style="display: none">
                     <label for="profissao">Profissão:</label>
-                    <input name="profissao" id="profissao" type="text" class="form-control">
+                    <input name="profissao" data-schema-id="#/properties/profissao" id="profissao" type="text" class="form-control">
                 </div>
 
 
                 <div class="form-group custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" name="profissional_de_lar"
+                    <input type="checkbox" class="custom-control-input" name="profissional_de_lar" data-schema-id="#/properties/profissional_de_lar"
                            id="profissional_de_lar">
                     <label class="custom-control-label" for="profissional_de_lar">É funcionário ou utente de
                         Lar/Instituição de Apoio Social?<span class="required-here"></span></label>
@@ -275,11 +278,11 @@
 
                 <div id="nome-do-lar-wrapper" class="form-group required" style="display: none">
                     <label for="nome_do_lar">Nome do lar/Instituição:</label>
-                    <input name="nome_do_lar" id="nome_do_lar" type="text" class="form-control">
+                    <input name="nome_do_lar" data-schema-id="#/properties/nome_do_lar" id="nome_do_lar" type="text" class="form-control">
                 </div>
 
                 <div class="form-group custom-control custom-switch form-dados-prof-item" style="display: none">
-                    <input type="checkbox" class="custom-control-input" name="profissional_de_saude"
+                    <input type="checkbox" class="custom-control-input" name="profissional_de_saude" data-schema-id="#/properties/profissional_de_saude"
                            id="profissional_de_saude">
                     <label class="custom-control-label" for="profissional_de_saude">É profissional de saúde?<span
                             class="required-here"></span></label>
@@ -287,7 +290,7 @@
 
                 <div id="instituicao-de-saude-wrapper" class="form-group required" style="display: none">
                     <label for="instituicao_de_saude">Instituição de Saúde a que pertence:</label>
-                    <input name="instituicao_de_saude" id="instituicao_de_saude" type="text" class="form-control">
+                    <input name="instituicao_de_saude" data-schema-id="#/properties/instituicao_de_saude" id="instituicao_de_saude" type="text" class="form-control">
                 </div>
 
             </fieldset>
@@ -296,7 +299,7 @@
                 <legend>Exames e Antecedentes</legend>
 
                 <div class="form-group custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" name="fez_teste" id="fez_teste">
+                    <input type="checkbox" class="custom-control-input" name="fez_teste" data-schema-id="#/properties/fez_teste" id="fez_teste">
                     <label class="custom-control-label" for="fez_teste">Fez teste à COVID19?
                         <span class="required-here"></span>
                     </label>
@@ -308,14 +311,14 @@
                 <div id="fez-teste-wrapper" class="form-group" style="display: none">
                     <div class="form-group required">
                         <label for="data_do_exame">Data do teste à COVID19:</label>
-                        <input name="data_do_exame" id="data_do_exame" type="date" class="form-control">
+                        <input name="data_do_exame" data-schema-id="#/properties/data_do_exame" id="data_do_exame" type="date" data-type="date" class="form-control">
                         <small id="data_do_exameHelp" class="form-text text-muted">
                             Data em que fez o teste.
                         </small>
                     </div>
                     <div class="form-group required">
                         <label for="resultado_exame">Resultado do teste:</label>
-                        <select name="resultado_exame" id="resultado_exame" class="form-control">
+                        <select name="resultado_exame" data-schema-id="#/properties/resultado_exame" id="resultado_exame" class="form-control">
                             <option hidden disabled selected value> -- seleccione uma opção --</option>
                             <option value="1">Positivo</option>
                             <option value="2">Negativo</option>
@@ -329,7 +332,7 @@
                 </div>
 
                 <div class="form-group custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" name="tem_doenca_cronica"
+                    <input type="checkbox" class="custom-control-input" name="tem_doenca_cronica" data-schema-id="#/properties/tem_doenca_cronica"
                            id="tem_doenca_cronica">
                     <label class="custom-control-label" for="tem_doenca_cronica">Tem alguma doença crónica?
                         <span class="required-here"></span>
@@ -338,7 +341,7 @@
 
                 <div id="doenca-cronica-wrapper" class="form-group" style="display: none">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" value="dpoc" id="DPOC" name="dpoc">
+                        <input type="checkbox" class="form-check-input" value="dpoc" id="DPOC" name="dpoc" data-schema-id="#/properties/dpoc">
                         <label class="form-check-label" for="DPOC">
                             DPOC
                         </label>
@@ -348,49 +351,49 @@
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="asma" name="asma">
+                        <input type="checkbox" class="form-check-input" id="asma" name="asma" data-schema-id="#/properties/asma">
                         <label class="form-check-label" for="asma">
                             Asma
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="ic" name="ic">
+                        <input type="checkbox" class="form-check-input" id="ic" name="ic" data-schema-id="#/properties/ic">
                         <label class="form-check-label" for="ic">
                             Insuficiência Cardíaca
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="diabetes" name="diabetes">
+                        <input type="checkbox" class="form-check-input" id="diabetes" name="diabetes" data-schema-id="#/properties/diabetes">
                         <label class="form-check-label" for="diabetes">
                             Diabetes
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="hipertensao" name="hipertensao">
+                        <input type="checkbox" class="form-check-input" id="hipertensao" name="hipertensao" data-schema-id="#/properties/hipertensao">
                         <label class="form-check-label" for="hipertensao">
                             Hipertensão Arterial
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="d_hc" name="d_hc">
+                        <input type="checkbox" class="form-check-input" id="d_hc" name="d_hc" data-schema-id="#/properties/d_hc">
                         <label class="form-check-label" for="d_hc">
                             Doença Hepática Crónica
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="d_rc" name="d_rc">
+                        <input type="checkbox" class="form-check-input" id="d_rc" name="d_rc" data-schema-id="#/properties/d_rc">
                         <label class="form-check-label" for="d_rc">
                             Doença Renal Crónica
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="neoplasia_ativa" name="neoplasia_ativa">
+                        <input type="checkbox" class="form-check-input" id="neoplasia_ativa" name="neoplasia_ativa" data-schema-id="#/properties/neoplasia_ativa">
                         <label class="form-check-label" for="neoplasia_ativa">
                             Neoplasia Ativa
                         </label>
@@ -398,7 +401,7 @@
 
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="outra_imunossupressao"
-                               name="outra_imunossupressao">
+                               name="outra_imunossupressao" data-schema-id="#/properties/outra_imunossupressao">
                         <label class="form-check-label" for="outra_imunossupressao">
                             Doença que provoque imunossupressão
                         </label>
@@ -411,7 +414,7 @@
                 </div>
 
                 <div class="form-group custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" name="tem_sintomas" id="tem_sintomas">
+                    <input type="checkbox" class="custom-control-input" name="tem_sintomas" data-schema-id="#/properties/tem_sintomas" id="tem_sintomas">
                     <label class="custom-control-label" for="tem_sintomas">Está com sintomas?
                         <span class="required-here"></span>
                     </label>
@@ -424,7 +427,7 @@
 
                     <div class="form-group required">
                         <label for="data_de_inicio_de_sintomas">Data em que iniciou os sintomas</label>
-                        <input name="data_de_inicio_de_sintomas" id="data_de_inicio_de_sintomas" type="date"
+                        <input name="data_de_inicio_de_sintomas" data-schema-id="#/properties/data_de_inicio_de_sintomas" id="data_de_inicio_de_sintomas" type="date" data-type="date"
                                class="form-control">
                         <small class="form-text text-muted">
                             Data de início de sintomas
@@ -432,53 +435,53 @@
                     </div>
 
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="febre" name="febre">
+                        <input type="checkbox" class="form-check-input" id="febre" name="febre" data-schema-id="#/properties/febre">
                         <label class="form-check-label" for="febre">Febre (mais de 38ºC)</label>
                     </div>
                     
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="tosse" name="tosse">
+                        <input type="checkbox" class="form-check-input" id="tosse" name="tosse" data-schema-id="#/properties/tosse">
                         <label class="form-check-label" for="tosse">Tosse</label>
                     </div>
                     
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="mialgias" name="mialgias">
+                        <input type="checkbox" class="form-check-input" id="mialgias" name="mialgias" data-schema-id="#/properties/mialgias">
                         <label class="form-check-label" for="mialgias">Dores no corpo</label>
                     </div>
                     
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="cefaleias" name="cefaleias">
+                        <input type="checkbox" class="form-check-input" id="cefaleias" name="cefaleias" data-schema-id="#/properties/cefaleias">
                         <label class="form-check-label" for="cefaleias">Dores de cabeça</label>
                     </div>
                     
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="astenia" name="astenia">
+                        <input type="checkbox" class="form-check-input" id="astenia" name="astenia" data-schema-id="#/properties/astenia">
                         <label class="form-check-label" for="astenia">Cansaço fácil</label>
                     </div>
                     
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="dispneia" name="dispneia">
+                        <input type="checkbox" class="form-check-input" id="dispneia" name="dispneia" data-schema-id="#/properties/dispneia">
                         <label class="form-check-label" for="dispneia">Falta de ar</label>
                     </div>
                     
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="odinofagia" name="odinofagia">
+                        <input type="checkbox" class="form-check-input" id="odinofagia" name="odinofagia" data-schema-id="#/properties/odinofagia">
                         <label class="form-check-label" for="odinofagia">Dor de garganta</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="hipoanosmia" name="hipoanosmia">
+                        <input type="checkbox" class="form-check-input" id="hipoanosmia" name="hipoanosmia" data-schema-id="#/properties/hipoanosmia">
                         <label class="form-check-label" for="hipoanosmia">Falta ou ausência de cheiro</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="disgeusia" name="disgeusia">
+                        <input type="checkbox" class="form-check-input" id="disgeusia" name="disgeusia" data-schema-id="#/properties/disgeusia">
                         <label class="form-check-label" for="disgeusia">Falta ou ausência de sabor</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="diarreia" name="diarreia">
+                        <input type="checkbox" class="form-check-input" id="diarreia" name="diarreia" data-schema-id="#/properties/diarreia">
                         <label class="form-check-label" for="diarreia">Diarreia</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="dor_toracica" name="dor_toracica">
+                        <input type="checkbox" class="form-check-input" id="dor_toracica" name="dor_toracica" data-schema-id="#/properties/dor_toracica">
                         <label class="form-check-label" for="dor_toracica">Dor no peito</label>
                     </div>
                 </div>
@@ -496,7 +499,7 @@
 
                 <div class="form-group required">
                     <label for="data_de_contacto">Data de Contacto:</label>
-                    <input name="data_de_contacto" id="data_de_contacto" type="date" class="form-control" required>
+                    <input name="data_de_contacto" data-schema-id="#/properties/data_de_contacto" id="data_de_contacto" type="date" data-type="date" class="form-control" required>
                     <small id="data_de_contactoHelp" class="form-text text-muted">
                         Data do último contacto que teve com <span class="caso_pos_name"></span>.
                     </small>
@@ -504,7 +507,7 @@
 
                 <div class="form-group required">
                     <label for="exp_contexto">Em que contexto esteve com o caso positivo?</label>
-                    <select name="exp_contexto" id="exp_contexto" class="form-control" required>
+                    <select name="exp_contexto" data-schema-id="#/properties/exp_contexto" id="exp_contexto" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="Co-habitação">Cohabitante</option>
                         <option value="Familiar">Familiar</option>
@@ -525,7 +528,7 @@
 
                 <div class="form-group required">
                     <label for="exp_tempo">Quanto tempo esteve com o caso positivo?</label>
-                    <select name="exp_tempo" id="exp_tempo" class="form-control" required>
+                    <select name="exp_tempo" data-schema-id="#/properties/exp_tempo" id="exp_tempo" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="Menos de 15 minutos">Menos de 15 minutos</option>
                         <option value="Entre 15 minutos e 1 hora">Entre 15 minutos e 1 hora</option>
@@ -539,7 +542,7 @@
 
                 <div class="form-group required">
                     <label for="exp_local">Em que tipo de local esteve com o caso positivo?</label>
-                    <select name="exp_local" id="exp_local" class="form-control" required>
+                    <select name="exp_local" data-schema-id="#/properties/exp_local" id="exp_local" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="Ambiente Aberto">Espaço Aberto (rua)</option>
                         <option value="Ambiente Fechado">Espaço Fechado (dentro de casa, sala de reuniões, cinema,
@@ -554,7 +557,7 @@
 
                 <div class="form-group required">
                     <label for="exp_distancia">A que distância esteve do caso positivo?</label>
-                    <select name="exp_distancia" id="exp_distancia" class="form-control" required>
+                    <select name="exp_distancia" data-schema-id="#/properties/exp_distancia" id="exp_distancia" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="Menos de 1 metro">Menos de 1 metro</option>
                         <option value="Entre 1 a 2 metros">Entre 1 a 2 metros</option>
@@ -567,7 +570,7 @@
 
                 <div class="form-group required">
                     <label for="exp_mascara_contacto">Você usou máscara?</label>
-                    <select name="exp_mascara_contacto" id="exp_mascara_contacto" class="form-control" required>
+                    <select name="exp_mascara_contacto" data-schema-id="#/properties/exp_mascara_contacto" id="exp_mascara_contacto" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="O contactante usou máscara social">Sim, Máscara social (de pano)</option>
                         <option value="O contactante usou máscara cirúrgica">Sim, Máscara cirúrgica (de médico)</option>
@@ -586,7 +589,7 @@
 
                 <div class="form-group required">
                     <label for="exp_mascara_index">O caso positivo usou máscara?</label>
-                    <select name="exp_mascara_index" id="exp_mascara_index" class="form-control" required>
+                    <select name="exp_mascara_index" data-schema-id="#/properties/exp_mascara_index" id="exp_mascara_index" class="form-control" required>
                         <option hidden disabled selected value> -- seleccione uma opção --</option>
                         <option value="O caso index usou máscara social">Sim, máscara social (de pano)</option>
                         <option value="O caso index usou máscara cirúrgica">Sim, máscara cirúrgica (de médico)</option>
@@ -606,11 +609,8 @@
             </fieldset>
             <br>
             <div class="form-group">
-                <!-- g-recaptcha -->
                 <button id="enviarform"
                         class="btn btn-primary"
-                        data-sitekey="6LfUjN8ZAAAAABKJC-HJEXlOeIyeM9ypBXYGi_aF"
-                        data-callback='onSubmit'
                         onclick="submitForm(event)">
                     Enviar Formulário
                     <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
@@ -620,7 +620,7 @@
     </div>
 </div>
 
-<footer><center>Programmed by Estêvão Soares dos Santos<br>Copyright (c) Estêvão Soares dos Santos - ACES Pinhal Litoral 2020-2021</center></footer>
+<footer>Programmed by Estêvão Soares dos Santos<br>Copyright (c) Estêvão Soares dos Santos - ACES Pinhal Litoral 2020-2021</footer>
 
 <!-- a partir daqui não mexer -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
@@ -629,7 +629,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.12.6/ajv.min.js"
+        integrity="sha512-+WCxUYg8L1mFBIyL05WJAJRP2UWCy+6mvpMHQbjPDdlDVcgS4XYyPhw5TVvzf9Dq8DTD/BedPW5745dqUeIP5g=="
+        crossorigin="anonymous"></script>
 <script src="../js/config.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/form2.js"></script>

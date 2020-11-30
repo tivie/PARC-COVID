@@ -62,6 +62,11 @@ function addLoadingStatus(ev) {
   ev.currentTarget.children[0].classList.remove("d-none");
 }
 
+function removeLoadingStatus(ev) {
+  ev.currentTarget.disabled = false;
+  ev.currentTarget.children[0].classList.add("d-none");
+}
+
 function removeContact(ev) {
   ev.currentTarget.parentElement.parentElement.remove();
 }
@@ -74,7 +79,7 @@ function getParams() {
   var urlStr = window.location.href.replace(/\?.*#/g,"?");
   urlStr = urlStr.replace(/#/g, "?");
   var myUrl = new URL(urlStr);
-  return myUrl.searchParams;
+  return new URLSearchParams(myUrl.search);
 }
 
 /**
@@ -103,9 +108,81 @@ function switchActivate($wrapper, makeRequired) {
   }
 }
 
+/**
+ *
+ * @param {HTMLInputElement} input
+ */
+function validateDate(input) {
+  var idate = input.value;
+  
+  if (idate instanceof Date) {
+    //return true;
+  } else if (typeof idate === 'string') {
+    if (idate === "") {
+      return true
+    }
+
+    // check if it matches ####-##-## format
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(idate)) {
+      input.setCustomValidity("A data tem de estar no formato yyyy-mm-dd");
+      return false;
+    }
+    idate = idate.split(idate).map(parseInt);
+    if (idate[0] < 1900 || idate[0] > 2100) {
+      input.setCustomValidity("O ano tem de ser superior a 1900 e inferior a 2100");
+      return false;
+    }
+
+    if (idate[1] < 1 || idate[1] > 12) {
+      input.setCustomValidity("O mês especificado " + idate[1] + " não existe");
+      return false;
+    }
+
+    if (idate[2] < 1 || idate[2] > 31) {
+      input.setCustomValidity("O dia especificado " + idate[2] + " não existe");
+      return false;
+    }
+
+    switch (idate[1]) {
+      case 1:
+      case 3:
+      case 5:
+      case 7:
+      case 8:
+      case 10:
+      case 12:
+        if (idate[2] > 31) {
+          input.setCustomValidity("O mês " + idate[1] + " tem, no máximo, 31 dias");
+          return false;
+        }
+        break;
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+        if (idate[2] > 30) {
+          input.setCustomValidity("O mês " + idate[1] + " tem, no máximo, 30 dias");
+          return false;
+        }
+        break;
+      case 2:
+        if (idate[2] > 29) {
+          input.setCustomValidity("O mês " + idate[1] + " tem, no máximo, 29 dias");
+          return false;
+        }
+        break;
+    }
+  }
+  input.setCustomValidity("");
+  return true;
+}
+
 $(document).ready(function () {
   $('#adicionar-contacto').click(function () {
-    $('#cena-para-add .rastreio-de-contactos-row').first().clone().appendTo('#rastreio-de-contactos-items');
+    $('#cena-para-add .rastreio-de-contactos-row')
+      .first()
+      .clone()
+      .appendTo('#rastreio-de-contactos-items');
   });
 
   // Ativar/desativar dados profissionais se a pessoa estiver empregada/desempregada
@@ -162,7 +239,7 @@ $(document).ready(function () {
         .show();
       
       fregSelect.prop('selectedIndex',0);
-      fregSelect.prop('required', true);
+      //fregSelect.prop('required', true);
       fregSelect.show();
     }
 
@@ -185,5 +262,6 @@ $(document).ready(function () {
   $('#profissional_de_saude').click(function() {
     switchActivate($('#instituicao-de-saude-wrapper'));
   });
-  
 });
+
+

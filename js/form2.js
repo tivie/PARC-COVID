@@ -18,8 +18,16 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
+var schema;
+
 $(document).ready(function() {
 
+  $.getJSON("../schemas/form2.schema.json")
+    .done(function(json) {
+      schema = json;
+    });
+  
   var case_guid = getParams().get('case_guid');
   var contact_guid = getParams().get('contact_guid');
   var cpn = getParams().get('cpn');
@@ -87,23 +95,25 @@ function validateCheckBoxGroup($wrapper) {
 }
 
 function submitForm(ev) {
+  var form = $('#formulario-contacto');
+  var case_guid = getParams().get('case_guid');
+  var contact_guid = getParams().get('contact_guid');
+  var id = getParams().get('id');
+  
+  addLoadingStatus(ev);
+  
   // run custom validity
   validateCheckBoxGroup($('#sintomas-wrapper'));
   validateCheckBoxGroup($('#doenca-cronica-wrapper'));
   
-  var form = $('#formulario-contacto');
+  $(form).find('input[data-type="date"]').each(function() {
+    validateDate(this);
+  });
+
   if (!form[0].checkValidity()) {
+    removeLoadingStatus(ev);
     return false;
   }
-  
-  ev.preventDefault();
-  addLoadingStatus(ev);
-  
-  // validate params
-  var case_guid = getParams().get('case_guid');
-  var contact_guid = getParams().get('contact_guid');
-  var id = getParams().get('id');
-  //if (!case_guid || !contact_guid || !id) return false;
   
   var arrayData = form.serializeArray();
   var payload = {};
@@ -162,15 +172,30 @@ function submitForm(ev) {
     delete payload.data_do_exame;
     delete payload.resultado_exame;
   }
-  
   if (payload.tem_sintomas === false) {
     delete payload.data_de_inicio_de_sintomas;
   }
+
+  // last validation (against Schema)
+  //var ajv = new Ajv();
+  //var validate = ajv.compile(schema);
+  //var valid = validate(payload);
+  //if (!valid) {
+  //  console.log(validate.errors);
+  //}
+
+  //if (!form[0].checkValidity()) {
+  //  removeLoadingStatus(ev);
+  //  return false;
+  //}
+
+  ev.preventDefault();
   
-  // para testar, abrir a consola no browser e descomentar as 2 linhas abaixo
-  //console.log(payload);
-  console.log(JSON.stringify(payload));
-  //return true;
+  if (config.debug) {
+    console.log(JSON.stringify(payload));
+    removeLoadingStatus(ev);
+    return false;
+  }
 
   var url = config.form2.url;
 
@@ -187,15 +212,11 @@ function submitForm(ev) {
 
   rqt.done(function (response) {
     // dar feedback ao utente
-    console.log('cool');
     window.location.href = '../responses/sucesso.html';
   });
 
   rqt.fail(function (xhr, status) {
-    var button = document.getElementById('enviarform');
-    button.disabled = false;
-    button.children[0].classList.add("d-none");
-    console.log(xhr);
+    removeLoadingStatus(ev);
     alert(xhr.responseJSON.error.message);
   });
 }

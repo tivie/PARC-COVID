@@ -21,15 +21,20 @@
 
 function submitForm3(ev) {
   var form = $('#formulario-rastreio-contactos');
-  if (!form[0].checkValidity()) {
-    return false;
-  }
-  ev.preventDefault();
-  addLoadingStatus(ev);
   var arrayData = form.serializeArray();
   var contactos;
   var payload = {};
   var params = getParams();
+
+  addLoadingStatus(ev);
+  
+  if (!form[0].checkValidity()) {
+    removeLoadingStatus(ev);
+    return false;
+  }
+  ev.preventDefault();
+  
+
 
   // URL Params
   payload.casehash = window.location.hash.replace(/^#/, '');
@@ -51,11 +56,12 @@ function submitForm3(ev) {
     }
   }
 
-  // para testar, abrir a consola no browser e descomentar as 2 linhas abaixo
-  //console.log(payload);
-  //console.log(JSON.stringify(payload));
-  //return;
-
+  if (config.debug) {
+    console.log(JSON.stringify(payload));
+    removeLoadingStatus(ev);
+    return false;
+  }
+  
   var url = config.form3.url;
 
   var rqt = $.ajax({
@@ -75,19 +81,7 @@ function submitForm3(ev) {
   });
 
   rqt.fail(function (xhr, status) {
-    var button = document.getElementById('enviarform');
-    button.disabled = false;
-    button.children[0].classList.add("d-none");
-    console.log(xhr);
+    removeLoadingStatus(ev);
     alert(xhr.responseJSON.error.message);
   });
 }
-
-$(document).ready(function () {
-  $('#adicionar-contacto').click(function () {
-    $('#cena-para-add .rastreio-de-contactos-row')
-      .first()
-      .clone()
-      .appendTo('#rastreio-de-contactos-items');
-  });
-});
