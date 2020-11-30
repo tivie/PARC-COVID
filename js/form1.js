@@ -28,6 +28,7 @@ function submitForm(ev) {
   var arrayData = form.serializeArray();
   var contactos;
   var payload = {};
+  var params = getParams();
   
   
   if (!form[0].checkValidity()) {
@@ -36,7 +37,7 @@ function submitForm(ev) {
   }
   
   // Obter hash do endereço e adicionar ao payload
-  payload.casehash = window.location.hash.replace(/^#/, '');
+  payload.casehash = params.get('guid');
   payload.contactos = [];
   contactos = arrayData.filter(function(f) { return f.name.match(/^contacto_/); });
 

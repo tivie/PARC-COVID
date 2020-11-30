@@ -37,7 +37,7 @@ function submitForm3(ev) {
 
 
   // URL Params
-  payload.casehash = window.location.hash.replace(/^#/, '');
+  payload.casehash = params.get('guid');
   payload.contactos = [];
   contactos = arrayData.filter(function (f) {
     return f.name.match(/^contacto_/);
