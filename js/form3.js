@@ -27,7 +27,7 @@ function submitForm3(ev) {
   var params = getParams();
   var button = document.getElementById('enviarform');
 
-  addLoadingStatus(ev);
+  addLoadingStatus(button);
   
   if (!form[0].checkValidity()) {
     removeLoadingStatus(button);

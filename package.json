@@ -1,0 +1,25 @@
+{
+  "name": "pap-covid-forms",
+  "version": "0.9.7",
+  "description": "Formulários para a aplicação PAP-COVID",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "selenium-webdriver": "^4.0.0-alpha.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tivie/PARC-COVID.git"
+  },
+  "author": "Estêvão Soares dos Santos",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/tivie/PARC-COVID/issues"
+  },
+  "homepage": "https://github.com/tivie/PARC-COVID#readme"
+}
